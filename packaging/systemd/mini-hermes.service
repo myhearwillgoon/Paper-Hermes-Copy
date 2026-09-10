@@ -1,0 +1,26 @@
+# mini-hermes systemd **用户级** unit(组件 #10:supervisor 契约)
+# 安装:cp 到 ~/.config/systemd/user/ && systemctl --user daemon-reload
+#
+# 退出码契约(见 mini_hermes/supervisor.py):
+#   75 (EX_TEMPFAIL) = "请重启我"  —— 看门狗杀卡死进程后以此码退出
+#   0                = 正常退出(Ctrl-C/SIGTERM 优雅中断),不重启
+#   2                = 配置错误,重启无意义,不重启
+# Restart=on-failure 覆盖非零退出(含 75);RestartPreventExitStatus 显式排除,
+# 保证语义清晰、与代码注释一致。
+# 非 Linux / 无 systemd 环境(如 CI):降级为手动验证 —— 契约测试只断言
+# 进程以 75 退出,重启循环由测试脚本模拟(PLAN §9)。
+
+[Unit]
+Description=mini-hermes agent harness
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/mini-hermes/.venv/bin/mini-hermes chat
+Restart=on-failure
+RestartSec=2
+RestartPreventExitStatus=0 2
+# 看门狗 os._exit(75) 属 "failure"(非零),会被 Restart 拉起 —— 这正是契约。
+
+[Install]
+WantedBy=default.target
