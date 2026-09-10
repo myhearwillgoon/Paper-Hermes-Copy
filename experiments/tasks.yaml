@@ -1,0 +1,103 @@
+# 对照实验任务集(PLAN §10.2 预注册,实验开始前冻结 —— 修改需 re-commit 留痕)
+#
+# 8 个正式任务:3 易 / 3 中 / 2 难(难 = 20+ 引用或预期多轮 gate retry)
+# 2 个领航任务(pilot: true):只用于 §10.4 基线方差验证,不进正式分析
+#
+# cassette 覆盖说明:tests/fixtures/cassettes 只覆盖 1706.03762 / 1810.04805
+# (arXiv)与一条 Semantic Scholar 标题查询。正式实验必须
+# gate_external_mode: live(首次运行录制新 cassette,原始响应归档,§9/§10.3)。
+
+- id: t01-attention
+  difficulty: easy
+  section: "1.1 Attention Mechanisms"
+  title: "注意力机制基础"
+  year_threshold: 2017
+  seed_papers:
+    - {title: "Attention Is All You Need", year: 2017, source: "arXiv:1706.03762"}
+    - {title: "BERT: Pre-training of Deep Bidirectional Transformers", year: 2018, source: "arXiv:1810.04805"}
+  targets: {words_range: [2400, 2600], citations_range: [20, 25], density_min: 0.8, subsection_min_citations: 3}
+
+- id: t02-pretraining
+  difficulty: easy
+  section: "2.1 Pre-training Objectives"
+  title: "预训练目标函数"
+  year_threshold: 2018
+  seed_papers:
+    - {title: "BERT: Pre-training of Deep Bidirectional Transformers", year: 2018, source: "arXiv:1810.04805"}
+    - {title: "Language Models are Few-Shot Learners", year: 2020, source: "NeurIPS 2020"}
+  targets: {words_range: [2400, 2600], citations_range: [20, 25], density_min: 0.8, subsection_min_citations: 3}
+
+- id: t03-fewshot
+  difficulty: easy
+  section: "2.4 In-Context Learning"
+  title: "上下文学习与提示"
+  year_threshold: 2020
+  seed_papers:
+    - {title: "Language Models are Few-Shot Learners", year: 2020, source: "NeurIPS 2020"}
+    - {title: "Attention Is All You Need", year: 2017, source: "arXiv:1706.03762"}
+  targets: {words_range: [2400, 2600], citations_range: [20, 25], density_min: 0.8, subsection_min_citations: 3}
+
+- id: t04-efficiency
+  difficulty: medium
+  section: "3.1 Efficient Transformers"
+  title: "高效 Transformer 架构"
+  year_threshold: 2020
+  seed_papers:
+    - {title: "Attention Is All You Need", year: 2017, source: "arXiv:1706.03762"}
+  targets: {words_range: [2400, 2600], citations_range: [20, 25], density_min: 0.8, subsection_min_citations: 3}
+
+- id: t05-retrieval
+  difficulty: medium
+  section: "3.4 Retrieval-Augmented Generation"
+  title: "检索增强生成"
+  year_threshold: 2020
+  seed_papers:
+    - {title: "BERT: Pre-training of Deep Bidirectional Transformers", year: 2018, source: "arXiv:1810.04805"}
+  targets: {words_range: [2400, 2600], citations_range: [20, 25], density_min: 0.8, subsection_min_citations: 3}
+
+- id: t06-alignment
+  difficulty: medium
+  section: "4.1 Alignment Techniques"
+  title: "对齐技术"
+  year_threshold: 2022
+  seed_papers:
+    - {title: "Language Models are Few-Shot Learners", year: 2020, source: "NeurIPS 2020"}
+  targets: {words_range: [2400, 2600], citations_range: [20, 25], density_min: 0.8, subsection_min_citations: 3}
+
+- id: t07-agents-survey
+  difficulty: hard      # 20+ 引用
+  section: "5.1 LLM Agent Architectures"
+  title: "LLM Agent 架构综述"
+  year_threshold: 2023
+  seed_papers:
+    - {title: "Attention Is All You Need", year: 2017, source: "arXiv:1706.03762"}
+  targets: {words_range: [2600, 2800], citations_range: [20, 30], density_min: 1.0, subsection_min_citations: 3}
+
+- id: t08-multimodal-scaling
+  difficulty: hard      # 预期多轮 gate retry
+  section: "5.3 Scaling Challenges"
+  title: "多模态扩展挑战"
+  year_threshold: 2024
+  seed_papers:
+    - {title: "Language Models are Few-Shot Learners", year: 2020, source: "NeurIPS 2020"}
+  targets: {words_range: [2600, 2800], citations_range: [20, 30], density_min: 1.0, subsection_min_citations: 3}
+
+- id: pilot-01-sparse-attention
+  pilot: true
+  difficulty: easy
+  section: "P.1 Sparse Attention"
+  title: "领航任务一:稀疏注意力"
+  year_threshold: 2019
+  seed_papers:
+    - {title: "Attention Is All You Need", year: 2017, source: "arXiv:1706.03762"}
+  targets: {words_range: [2400, 2600], citations_range: [20, 25], density_min: 0.8, subsection_min_citations: 3}
+
+- id: pilot-02-tokenization
+  pilot: true
+  difficulty: easy
+  section: "P.2 Tokenization"
+  title: "领航任务二:分词"
+  year_threshold: 2018
+  seed_papers:
+    - {title: "BERT: Pre-training of Deep Bidirectional Transformers", year: 2018, source: "arXiv:1810.04805"}
+  targets: {words_range: [2400, 2600], citations_range: [20, 25], density_min: 0.8, subsection_min_citations: 3}
