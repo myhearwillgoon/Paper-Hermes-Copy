@@ -1,0 +1,15 @@
+# Fixture 任务 2:agent harness(同 arXiv 种子对,第二个 arXiv-id 任务)
+section: "2.3 Agent Harnesses"
+focus_areas: ["agent loops", "tool use"]
+year_threshold: 2017
+seed_papers:
+  - title: "Attention Is All You Need"
+    year: 2017
+    source: "arXiv:1706.03762"
+  - title: "BERT: Pre-training of Deep Bidirectional Transformers"
+    year: 2018
+    source: "arXiv:1810.04805"
+targets:
+  words_range: [60, 600]
+  density_min: 0.5
+  subsection_min_citations: 1
