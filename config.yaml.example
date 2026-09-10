@@ -1,0 +1,30 @@
+# mini-hermes 配置示例。复制为 config.yaml 后填写真实值。
+# 所有字段均可被环境变量覆盖(见 README)。
+
+model:
+  name: gpt-4o-mini
+  base_url: https://api.openai.com/v1
+  api_key: sk-your-main-key
+  # temperature: 0.7        # 可选
+
+# 辅助模型(review fork / 压缩 / gate 机械检查 / LLM-judge)。
+# 缺省时回退为主模型配置(PLAN E6)。
+aux_model:
+  name: gpt-4o-mini
+  base_url: https://api.openai.com/v1
+  api_key: sk-your-aux-key
+
+# Tavily web_search(PLAN E5b)。也可用环境变量 TAVILY_API_KEY。
+# tavily_api_key: tvly-your-key
+
+paths:
+  data_dir: ~/.mini-hermes        # 默认值
+  skill_lib_dir: ~/.mini-hermes/skill-lib
+
+# 实验隔离开关(PLAN §5):true 时不注入 skill 索引、不注册 skill 工具。
+no_skills: false
+
+# 日志(可选,均有默认值)
+logging:
+  level: INFO
+  dir: ~/.mini-hermes/logs
