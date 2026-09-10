@@ -1,0 +1,64 @@
+# academic_paper workflow —— 移植自 academic-paper-loop(6-Phase + 4-Gate)
+# P1 Research → G1 → P2 Planning → P3 Writing → G2/G3 → P4 Review → P5 Figures → G4 → P6 Final
+name: academic_paper
+
+targets:
+  year_threshold: 2024
+  venues: [arXiv, NeurIPS, ICML, ICLR, ACL, EMNLP, AAMAS, IEEE, ACM, Nature, Science, JMLR, COLM, COLING]
+  density_min: 0.8
+  words_range: [2100, 2800]
+  subsection_min_citations: 3
+
+phases:
+  - id: P1
+    name: Research
+    prompt_template: prompts/P1_research.md
+    toolset: [web_search, terminal, read_file, write_file, search_files]
+    output_contract: {path: EXTENDED_REFERENCES.md, min_bytes: 200}
+    gate: [G1]
+  - id: P2
+    name: Planning
+    prompt_template: prompts/P2_planning.md
+    toolset: [read_file, write_file, search_files]
+    output_contract: {path: PLAN.md, min_bytes: 100}
+  - id: P3
+    name: Writing
+    prompt_template: prompts/P3_writing.md
+    toolset: [read_file, write_file, search_files]
+    output_contract: {path: DRAFT.md, min_bytes: 200}
+    gate: [G2, G3]
+  - id: P4
+    name: Review
+    prompt_template: prompts/P4_review.md
+    toolset: [read_file, write_file]
+    output_contract: {path: REVIEW_REPORT.md, min_bytes: 100}
+  - id: P5
+    name: Figures
+    prompt_template: prompts/P5_figures.md
+    toolset: [read_file, write_file, terminal]
+    output_contract: {path: FIGURES.md, min_bytes: 50}
+    gate: [G4]
+  - id: P6
+    name: Final
+    prompt_template: prompts/P6_final.md
+    toolset: [read_file, write_file, search_files]
+    output_contract: {path: FINAL.md, min_bytes: 200}
+
+gates:
+  G1:
+    tool: gate_citation_check
+    escalation: BLOCK
+    max_retries: 2
+  G2:
+    tool: gate_data_veracity
+    escalation: USER_DECISION
+    args: {draft_file: DRAFT.md}
+  G3:
+    tool: gate_citation_density
+    escalation: USER_DECISION
+    args: {draft_file: DRAFT.md}
+  G4:
+    tool: gate_figure_integrity
+    escalation: BLOCK
+    max_retries: 2
+    args: {draft_file: FIGURES.md}
