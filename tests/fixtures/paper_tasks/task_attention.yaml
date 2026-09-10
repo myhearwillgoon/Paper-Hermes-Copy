@@ -1,0 +1,15 @@
+# Fixture 任务 1:注意力机制(2 篇 arXiv 种子,G1 走 cassette)
+section: "1.1 Attention Mechanisms"
+focus_areas: ["self-attention", "transformer efficiency"]
+year_threshold: 2017
+seed_papers:
+  - title: "Attention Is All You Need"
+    year: 2017
+    source: "arXiv:1706.03762"
+  - title: "BERT: Pre-training of Deep Bidirectional Transformers"
+    year: 2018
+    source: "arXiv:1810.04805"
+targets:
+  words_range: [60, 600]
+  density_min: 0.5
+  subsection_min_citations: 1
