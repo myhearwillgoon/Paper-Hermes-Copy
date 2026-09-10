@@ -1,0 +1,12 @@
+# Fixture 任务 3:无 arXiv ID 的标题引用(G1 走 Semantic Scholar cassette)
+section: "3.2 Few-Shot Learning"
+focus_areas: ["in-context learning"]
+year_threshold: 2020
+seed_papers:
+  - title: "Language Models are Few-Shot Learners"
+    year: 2020
+    source: "NeurIPS 2020, https://proceedings.neurips.cc/paper/2020/hash/1457c0d6bfcb4967418bfb8ac142f64a-Abstract.html"
+targets:
+  words_range: [60, 600]
+  density_min: 0.5
+  subsection_min_citations: 1
