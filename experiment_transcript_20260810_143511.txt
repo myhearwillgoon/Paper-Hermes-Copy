@@ -1,0 +1,1 @@
+seeded 3 skills:citation-validation-checklist, gate-failure-triage, survey-argument-flow
