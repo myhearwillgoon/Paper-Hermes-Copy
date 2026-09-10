@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtualenv
+.venv/
+
+# Test caches
+.pytest_cache/
+
+# Local config (secrets) — use config.yaml.example as template
+config.yaml
+
+# Generated cassettes (recorded external-API responses)
+cassettes/
+
+# Runtime data
+*.db
+*.db-wal
+*.db-shm
